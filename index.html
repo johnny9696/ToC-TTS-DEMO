@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<title>ToC-CTTS : Single Fine-Grained Conditioning To Text-to-Speech Based On Dialogue Text Context </title>
+	<meta name="generator" content="Jekyll v3.9.0">
+	<meta property="og:title" content="ToC-CTTS : Single Fine-Grained Conditioning To Text-to-Speech Based On Dialogue Text Context">
+	<meta property="og.locale" content ="en_US">
+	<link rel="canonical" href="https://github.com/johnny9696/ToC-CTTS-DEMO/">
+	<meta property="og:url" content="https://github.com/johnny9696/ToC-CTTS-DEMO/">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#157878">
+	<link rel="stylesheet" href="./style.css">
+</head>
+
+<section class = "page-header">
+</section>
+
+<section class="main-context">
+	<h1 id=""><center>ToC-CTTS : Single Fine-Grained Conditioning Conditioning To Text-to-Speech Based On Dialogue Text Context</center></h1>
+
+	<div style="display: none;">
+	  <center>Junbum Kim<sup>1</sup>, and Joon-Hyuk Chang<sup>2</sup></center>
+	  <br>
+	  <center>Department of Electronic Engineering, Hanyang University, Seoul, Republic of Korea <sup>1, 2</sup></center>
+	  <center>johnny960423@gmail.com<sup>1</sup>,&nbsp;&nbsp;&nbsp; jchang@hanyang.ac.kr <sup>2</sup></center>
+	</div>
+
+	<!-- 대체 텍스트 -->
+	<div>
+	  <center><i>Anonymous submission to Interspeech 2025</i></center>
+	</div>
+
+
+
+
+
+	<center><h2 id="abstract">Abstract</h2></center>
+	<br>
+	<p>
+As human-computer interaction becomes increasingly important, synthesizing human-like speech has become a challenging issue. Early neural text-to-speech models focused on generating pronunciation, making it difficult to synthesize appropriate speech based on the situation. Previous research on conversational TTS focused on understanding the whole conversation without considering the speaker's relationships or emotions. They also used pretrained models to extract the feature vector of text and audio, which could cause a mismatch between the ground truth feature vector and the synthesized speech feature vector.
+To address these problems, we proposed a text-only conversational text-to-speech model that contains two modules. First, the text-only dialogue context encoder provides conversation context based on understanding the conversation flows and the speaker's relationships. This module uses only text, which could result in a lack of information compared to the multi-modal context model. To solve this problem, we developed a target prosody extractor that extracts prosody based on ground truth speech. This allows the text-only dialogue context encoder to predict prosody. Our proposed model reached a MOS score of \blue{4.xx}, demonstrating its naturalness and quality in synthesizing speech based on dialogue.
+	</p>
+	<br>
+	<center><h2><p class="toc_title">Contents</p></h2></center>
+	<div id="toc_container" style="font-size: 18px;">
+		<ol>
+			<li><a href="#1">Model Architecture & Key Methods</a></li>
+			<li><a href="#2">Speech Demos</a></li>
+			<li><a href="#3">Evaluation Results</a></li>
+		</ol>
+	</div>
+	<br>
+	<center><a name="1"><h2>1. Model Architecture & Key Methods</h2></a></center>
+	
+
+	<div style="margin-top: 20px;">
+	  <div style="margin-bottom: 20px;">
+	    <h3>1.1. Model Architecture</h3>
+	    <center>
+	  <img src="./FULL.png" style="max-width: 100%; height: auto;" title="Proposed Model Architecture">
+	</center>
+	  </div>
+	  <br>
+	  <div>
+	    <h3>1.2. Key Methods</h3>
+		<div id="toc_container" style="font-size: 18px;">
+			<ul>
+				<li>To solve the mismatch problem between the ground truth and synthesized speech, the proposed method extracts the dialogue context using only text.</li>
+				<li>To solve lack of information on single-modality, we made a target by using ground truth speech.</li>
+				<li>To make the conversation more similar to a real human interaction, a module is structured by separating the global and speaker modules.</li>
+			</ul>
+		</div>
+	  </div>
+	</div>
+
+
+	<br>
+
+	<center><a name="2"><h2>2. Speech Demos</h2></a></center>
+	<h3>2.1. Compare Different Model</h3>
+		<ul><p>
+			All the model was trained with batch size 16 and reconstructed to wave form by HiFi-GAN universal pre-trained model.
+		</p></ul>
+	<div style="overflow-x: auto;">
+	  <table style="border-collapse: collapse; width: 100%; font-size: 16px; text-align: center;">
+	    <tr>
+	      <th colspan="7" style="font-size: 20px; padding: 15px; border-bottom: 2px solid black;">Single Speech Demos</th>
+	    </tr>
+	    <tr>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black; width: 500px; text-align: center;">Text</th>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">GT</th>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">FS2</th>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">DailyTalk</th>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">FCtalker</th>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Proposed wo flow (N = 5)</th>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Proposed w flow (N = 5)</th>
+	    </tr>
+ <tr>
+      <td style="
+        border-top: 1px solid black; 
+        border-bottom: 1px solid black; 
+        padding: 10px; 
+        word-wrap: break-word; 
+        white-space: normal; 
+        line-height: 1.5; 
+        text-align: left; 
+        min-width: 300px; 
+        max-width: 500px; 
+        overflow: auto;">
+        May I see your drivers license?
+      </td>
+
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/GT/4_0_d96.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+    </tr>
+	  </table>
+	</div>
+
+	<br>
+
+<div style="overflow-x: auto;">
+  <table style="border-collapse: collapse; width: 100%; font-size: 16px; text-align: center;">
+    <tr>
+      <th colspan="8" style="font-size: 20px; padding: 15px; border-bottom: 2px solid black;">Dialogue Speech Demos</th>
+    </tr>
+    <tr>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black; min-width: 400px; max-width: 600px; text-align: center;">Text</th>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black; width: 200px; text-align: center;">Turns</th>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">GT</th>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">FS2</th>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">DailyTalk</th>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">FCtalker</th>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Proposed wo flow (N = 5)</th>
+      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">Proposed w flow (N = 5)</th>
+    </tr>
+ <tr>
+      <td style="
+        border-top: 1px solid black; 
+        border-bottom: 1px solid black; 
+        padding: 10px; 
+        word-wrap: break-word; 
+        white-space: normal; 
+        line-height: 1.5; 
+        text-align: left; 
+        min-width: 300px; 
+        max-width: 500px; 
+        overflow: auto;">
+        May I see your drivers license?
+      </td>
+       <td style="
+        border-top: 1px solid black; 
+        border-bottom: 1px solid black; 
+        padding: 10px; 
+        word-wrap: break-word; 
+        white-space: normal; 
+        line-height: 1.5; 
+        text-align: center; 
+        min-width: 100px; 
+        max-width: 200px; 
+        overflow: auto;">
+        2
+      </td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/GT/4_0_d96.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+    </tr>
+    <tr>
+      <td style="
+        border-top: 1px solid black; 
+        border-bottom: 1px solid black; 
+        padding: 10px; 
+        word-wrap: break-word; 
+        white-space: normal; 
+        line-height: 1.5; 
+        text-align: left; 
+        min-width: 300px; 
+        max-width: 500px; 
+        overflow: auto;">
+        May I see your drivers license?
+      </td>
+       <td style="
+        border-top: 1px solid black; 
+        border-bottom: 1px solid black; 
+        padding: 10px; 
+        word-wrap: break-word; 
+        white-space: normal; 
+        line-height: 1.5; 
+        text-align: center; 
+        min-width: 100px; 
+        max-width: 200px; 
+        overflow: auto;">
+        2
+      </td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/GT/4_0_d96.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+    </tr>
+  </table>
+</div>
+
+
+	<br>
+
+
+
+	<h3>2.2. Compare Different Historical Length on Proposed Model</h3>
+
+
+	<div style="overflow-x: auto;">
+	  <table style="border-collapse: collapse; width: 100%; font-size: 16px; text-align: center;">
+	    <tr>
+	      <th colspan="7" style="font-size: 20px; padding: 15px; border-bottom: 2px solid black;">Speech Demos with Different Historical Length</th>
+	    </tr>
+	    <tr>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black; width: 500px; text-align: center;">Text</th>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">N = 2</th>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">N = 3</th>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">N = 4</th>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">N = 5</th>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">N = 6</th>
+	      <th style="border-top: 1px solid black; border-bottom: 1px solid black;">N = 7</th>
+	    </tr>
+	    <tr>
+	      <td style="
+        border-top: 1px solid black; 
+        border-bottom: 1px solid black; 
+        padding: 10px; 
+        word-wrap: break-word; 
+        white-space: normal; 
+        line-height: 1.5; 
+        text-align: left; 
+        min-width: 300px; 
+        max-width: 500px; 
+        overflow: auto;">
+        May I see your drivers license?
+      </td>
+	      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/GT/4_0_d96.wav" controls preload></audio></td>
+	      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+	      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+	      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+	      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+	      <td style="border-top: 1px solid black; border-bottom: 1px solid black;"><audio src="Samples/Single/FS2/4_0_d96.wav" controls preload></audio></td>
+	    </tr>
+	  </table>
+	</div>
+
+	<br>
+	<br>
+	<center><a name="3"><h2>3. Evaluation Results</h2></a></center>
+
+		<ul><p>
+			<b>Mean Opinion Score(MOS)</b> and Dialogue Mean Opinion Score (D-MOS) was rated from 1 to 5. And average all the score with 95% confidence rate.
+		</p></ul>
+		<ul><p>
+			<b>Log-F0 Root Mean Square Error (F0 RMSE)</b> is the pitch accuracy. Pitch was extracted by pyworld library, and calculated into log scale. Then calculate with root mean square between ground truth and synthesized speech.
+		</p></ul>
+		<ul><p>
+			<b>Mel Ceptrial Distortion (MCD)</b> calculate the difference between ground truth audio and synthesized speech.
+		</p></ul>
+
+	<br>
+
+	<h3>3.1. Comparison With Other Models</h3>
+		<center>
+		  <img src="./Result 1.png" alt="Image description" style="max-width: 100%; height: auto;">
+		</center>
+	<br>
+	<h3>3.2. Ablation Study Results</h3>
+
+		<ul><p>
+			<b>Matching Root Mean Square Error (Matchin RMSE)</b> is calculating the difference between mel prosody extractor results and text-only dialogue encoder results.
+		</p></ul>
+
+		<center>
+		  <img src="./Result 2.png" alt="Image description" style="max-width: 100%; height: auto;">
+		</center>
+
+
+</section>
+
+<br>
+<br>
+<br>
+<br>
+<hr>
+<footer class="site-footer">
+<span class="site-footer-credits">This page was generated by <a href="https://pages.github.com/">GitHub Pages</a>.</span>
+</footer>
+</section>
+</body>
+<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+
+</html>
