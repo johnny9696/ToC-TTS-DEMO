@@ -103,8 +103,8 @@
 
 	<center><h2 id="abstract">Abstract</h2></center>
 	<br>
-	<p style = "padding-left: 10px; padding-right: 10px;">
-While human-computer interaction becomes more important, synthesizing human-like speech remains as a challenging issue. Conversational text-to-speech needs further research to generate natural dialogues for realistic situations. Previous research focused on understanding the conversation itself, without considering speaker relationships or emotional states. These models typically use pretrained systems to extract feature vectors from text and audio, sometimes causing mismatches between the ground truth feature vector and the synthesized audio vector. To address these problems, we propose a ToC-CTTS model with two modules. First, text-only dialogue context encoder captures conversation flow and speaker relationships using text. Second, target prosody extractor compensates by extracting prosody from ground truth speech, allowing the encoder to predict prosody. Our model achieved an MOS score of 3.63, demonstrating its naturalness and quality in synthesizing dialogue-based speech. 
+	<p style = "font-size: 18px; padding-left: 15px; padding-right: 15px;">
+While human-computer interaction becomes more important, synthesizing human-like speech remains as a challenging issue. Conversational text-to-speech needs further research to generate natural dialogues for realistic situations. Previous research focused on understanding the conversation itself, without considering speaker relationships or emotional states. These models typically use pretrained systems to extract feature vectors from text and audio, sometimes causing mismatches between the ground truth feature vector and the synthesized audio vector.To address these problems, we propose a ToC-TTS model with two modules. First, text-only dialogue context encoder captures conversation flow and speaker relationships using text, and generate single fine-grained condition that could replace split coarse-grained and fine-grained condition. Second, target prosody extractor compensates by extracting prosody from ground truth speech, allowing the encoder to predict prosody. Our model achieved an MOS score of 3.63, demonstrating its naturalness and quality in synthesizing dialogue-based speech. 
 	</p>
 	<br>
 	<center><h2><p class="toc_title">Contents</p></h2></center>
@@ -133,7 +133,7 @@ While human-computer interaction becomes more important, synthesizing human-like
 <script>
     let images = [
     { src: "./Dialogue_example.png", text: "Figure 1. Chain of speaker's emotion affect on conversation." },
-    { src: "./FULL.png", text: "Figure 2. Overall proposed model architecture." }
+    { src: "./FULL.png", text: "Figure 2. Overall proposed model architecture."}
 		];
 		let index = 0;
 
@@ -172,9 +172,9 @@ While human-computer interaction becomes more important, synthesizing human-like
 	    <h3 style = "padding-left: 10px;">1.2. Key Methods</h3>
 		<div id="toc_container" style="font-size: 18px;">
 			<ul>
-				<li>To solve the mismatch problem between the ground truth and synthesized speech, the proposed method extracts the dialogue context using only text.</li>
-				<li>To solve lack of information on single-modality, we made a target by using ground truth speech.</li>
-				<li>To make the conversation more similar to a real human interaction, a module is structured by separating the global and speaker modules.</li>
+				<li style = "padding-left: 10px; padding-right: 10px;">To solve the mismatch problem between the ground truth and synthesized speech, the proposed method extracts the dialogue context using only text.</li>
+				<li style = "padding-left: 10px; padding-right: 10px;">To solve lack of information on single-modality, we made a target by using ground truth speech.</li>
+				<li style = "padding-left: 10px; padding-right: 10px;">To make the conversation more similar to a real human interaction, a module is structured by separating the global and speaker modules.</li>
 			</ul>
 		</div>
 	  </div>
@@ -185,7 +185,7 @@ While human-computer interaction becomes more important, synthesizing human-like
 
 	<center><a name="2"><h2>2. Speech Demos</h2></a></center>
 	<h3 style = "padding-left: 10px;">2.1. Compare Different Model</h3>
-		<ul><p>
+		<ul><p style = "padding-left: 10px; padding-right: 10px;">
 			All the model was trained with batch size 16 and reconstructed to wave form by HiFi-GAN universal pre-trained model.
 		</p></ul>
 	<div style="overflow-x: auto;">
@@ -841,13 +841,13 @@ While human-computer interaction becomes more important, synthesizing human-like
 	<br>
 	<center><a name="3"><h2>3. Evaluation Results</h2></a></center>
 
-		<ul><p>
+		<ul><p style = "padding-left: 10px; padding-right: 10px;">
 			<b>Mean Opinion Score(MOS)</b> and <b>Dialogue Mean Opinion Score (D-MOS)</b> was rated from 1 to 5. And average all the score with 95% confidence rate.
 		</p></ul>
-		<ul><p>
+		<ul><p style = "padding-left: 10px; padding-right: 10px;">
 			<b>Log-F0 Root Mean Square Error (F0 RMSE)</b> is the pitch accuracy. Pitch was extracted by pyworld library, and calculated into log scale. Then calculate with root mean square between ground truth and synthesized speech.
 		</p></ul>
-		<ul><p>
+		<ul><p style = "padding-left: 10px; padding-right: 10px;">
 			<b>Mel Ceptrial Distortion (MCD)</b> calculate the difference between ground truth audio and synthesized speech.
 		</p></ul>
 
@@ -860,7 +860,7 @@ While human-computer interaction becomes more important, synthesizing human-like
 	<br>
 	<h3 style = "padding-left: 10px;">3.2. Ablation Study Results</h3>
 
-		<ul><p>
+		<ul><p style = "padding-left: 10px; padding-right: 10px;">
 			<b>Matching Root Mean Square Error (M-RMSE)</b> is calculating the difference between mel prosody extractor results and text-only dialogue encoder results.
 		</p></ul>
 
