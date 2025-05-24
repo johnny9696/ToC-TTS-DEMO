@@ -86,25 +86,17 @@
 </section>
 
 <section class="main-context">
-	<h1 id=""><center>ToC-TTS : Single Fine-Grained Conditioning to Text-to-Speech Based on Dialogue Text Context</center></h1>
+	<h1 id=""><center>DynaTalk: Modeling Dialogue Dynamics in TTS Through Separation of Speaker and Global Context</center></h1>
 
-	<div style="display: none;">
 	  <center>Junbum Kim<sup>1</sup>, and Joon-Hyuk Chang<sup>2</sup></center>
 	  <br>
 	  <center>Department of Electronic Engineering, Hanyang University, Seoul, Republic of Korea <sup>1, 2</sup></center>
 	  <center>johnny960423@gmail.com<sup>1</sup>,&nbsp;&nbsp;&nbsp; jchang@hanyang.ac.kr <sup>2</sup></center>
-	</div>
-
-	<!-- 대체 텍스트 -->
-	<div>
-	  <center><i>Anonymous submission to Interspeech 2025</i></center>
-	</div>
-
 
 	<center><h2 id="abstract">Abstract</h2></center>
 	<br>
 	<p style = "font-size: 18px; padding-left: 15px; padding-right: 15px;">
-While human-computer interaction becomes more important, synthesizing human-like speech remains as a challenging issue. Conversational text-to-speech needs further research to generate natural dialogues for realistic situations. Previous research focused on understanding the conversation itself, without considering speaker relationships or emotional states. These models use pretrained models to extract feature vectors from text and audio, which causes mismatch between the ground truth and the synthesized speech. To address these problems, we propose a ToC-TTS model with two modules. First, text-only dialogue context encoder captures dialogue flow and speaker relationships using text, and generates fine-grained condition. Second, target prosody extractor adjusts by extracting prosody from ground truth speech, allowing the encoder to predict prosody. Our model achieved a mean opinion score of 3.63, demonstrating its naturalness and quality in synthesizing dialogue-based speech.
+Conversational text-to-speech aims to generate natural and contextually appropriate speech in dialogue. While previous studies have made progress in modeling dialogue context, many have placed limited emphasis on speaker interactions and emotional dynamics. In addition, the use of pretrained models for feature extraction may lead to mismatches between ground truth and synthesized speech representations. To address these limitations, we propose DynaTalk with two core components. First, the split context learner separates speaker-specific and global contexts to better capture conversational structure and generate fine-grained prosody conditions from text. Second, mel prosody teacher extracts prosody targets from ground truth mel-spectrograms to guide the learner and compensate for missing acoustic information. Experimental results demonstrate that DynaTalk effectively models conversational context, enabling the generation of natural and context-sensitive speech.
 	</p>
 	<br>
 	<center><h2><p class="toc_title">Contents</p></h2></center>
@@ -132,8 +124,9 @@ While human-computer interaction becomes more important, synthesizing human-like
 
 <script>
     let images = [
-    { src: "./Dialogue_example.png", text: "Figure 1. Chain of speaker's emotion affect on conversation." },
-    { src: "./FULL.png", text: "Figure 2. Overall proposed model architecture."}
+    { src: "./Emotion_Affect_Previous.png", text: "Figure 1. Previous researches context modeling." },
+    { src: "./Emotion_Affect.png", text: "Figure 2. Propose methods to understand the dialouge"},
+    { src: "./MAIN.png", text: "Figure 3. Overall architecture of propose model"},
 		];
 		let index = 0;
 
@@ -172,9 +165,23 @@ While human-computer interaction becomes more important, synthesizing human-like
 	    <h3 style = "padding-left: 10px;">1.2. Key Methods</h3>
 		<div id="toc_container" style="font-size: 18px;">
 			<ul>
-				<li style = "padding-left: 10px; padding-right: 10px;">To solve the mismatch problem between the ground truth and synthesized speech, the proposed method extracts the dialogue context using only text.</li>
-				<li style = "padding-left: 10px; padding-right: 10px;">To solve lack of information on single-modality, we made a target by using ground truth speech.</li>
-				<li style = "padding-left: 10px; padding-right: 10px;">To make the conversation more similar to a real human interaction, a module is structured by separating the global and speaker modules.</li>
+				<li style = "padding-left: 10px; padding-right: 10px;">We explicitly separate speaker-specific and global con-
+texts in dialogue modeling. This separation allows the
+model to independently track each speaker’s emotional
+and prosodic trajectory while maintaining awareness of
+the overall dialogue flow, leading to more contextually
+appropriate and expressive speech generation. </li>
+				<li style = "padding-left: 10px; padding-right: 10px;">To overcome the information limitations of single modal
+modeling, we introduce a supervision mechanism us-
+ing prosody features extracted from ground truth mel-
+spectrograms.</li>
+				<li style = "padding-left: 10px; padding-right: 10px;">TWe mitigate the mismatch problem commonly observed
+in multi-modal approaches by maintaining consistent
+modality between training and inference.</li>
+				<li style = "padding-left: 10px; padding-right: 10px;">We construct a unified fine-grained conditioning mecha
+nism that integrates both coarse- and fine-level contextual
+information, enhancing the expressiveness of synthesized
+speech.</li>
 			</ul>
 		</div>
 	  </div>
@@ -850,23 +857,16 @@ While human-computer interaction becomes more important, synthesizing human-like
 		<ul><p style = "padding-left: 10px; padding-right: 10px;">
 			<b>Mel Ceptrial Distortion (MCD)</b> calculate the difference between ground truth audio and synthesized speech.
 		</p></ul>
-
-	<br>
-
-	<h3 style = "padding-left: 10px;">3.1. Comparison With Other Models</h3>
-		<center>
-		  <img src="./Result 1.png" alt="Image description" style="max-width: 100%; height: auto;">
-		</center>
-	<br>
-	<h3 style = "padding-left: 10px;">3.2. Ablation Study Results</h3>
-
 		<ul><p style = "padding-left: 10px; padding-right: 10px;">
 			<b>Matching Root Mean Square Error (M-RMSE)</b> is calculating the difference between mel prosody extractor results and text-only dialogue encoder results.
 		</p></ul>
 
+	<br>
 		<center>
-		  <img src="./Result 2.png" alt="Image description" style="max-width: 100%; height: auto;">
+		  <img src="./Result 1.png" alt="Image description" style="max-width: 100%; height: auto;">
 		</center>
+	<br>
+	
 
 
 </section>
