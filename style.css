@@ -573,9 +573,10 @@ a:hover {
 .page-header {
     color: #fff;
     text-align: center;
-    background-color: #159957;
-    background-image: linear-gradient(60deg, #b2d1d6, #1cb4be)
+    background-color: #F88D34;
+    background-image: linear-gradient(60deg, #f8ae34, #f88d34); /* 밝은 주황 → 진한 주황 */
 }
+
 
 @media screen and (min-width: 64em) {
     .page-header {

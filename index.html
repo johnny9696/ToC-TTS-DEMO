@@ -3,16 +3,16 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-	<title>ToC-TTS : Single Fine-Grained Conditioning to Text-to-Speech Based on Dialogue Text Context </title>
+	<title>DynaTalk: Modeling Dialogue Dynamics in TTS by Separation of Speaker and Global Contexts</title>
 	<meta name="generator" content="Jekyll v3.9.0">
-	<meta property="og:title" content="ToC-TTS : Single Fine-Grained Conditioning to Text-to-Speech Based on Dialogue Text Context">
+	<meta property="og:title" content="DynaTalk: Modeling Dialogue Dynamics in TTS by Separation of Speaker and Global Contexts">
 	<meta property="og.locale" content ="en_US">
 	<link rel="canonical" href="https://github.com/johnny9696/DynaTTS-DEMO/">
 	<meta property="og:url" content="https://github.com/johnny9696/DynaTTS-DEMO/">
 	<meta name="twitter:card" content="summary">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="theme-color" content="#157878">
+	<meta name="theme-color" content="#F88D34">
 	<link rel="stylesheet" href="./style.css">
 
 
@@ -86,17 +86,22 @@
 </section>
 
 <section class="main-context">
-	<h1 id=""><center>DynaTalk: Modeling Dialogue Dynamics in TTS Through Separation of Speaker and Global Context</center></h1>
+	<h1 id=""><center>DynaTalk: Modeling Dialogue Dynamics in TTS by Separation of Speaker and Global Contexts</center></h1>
 
+
+		<div style="display: none;">
 	  <center>Junbum Kim<sup>1</sup>, and Joon-Hyuk Chang<sup>2</sup></center>
 	  <br>
 	  <center>Department of Electronic Engineering, Hanyang University, Seoul, Republic of Korea <sup>1, 2</sup></center>
 	  <center>johnny960423@gmail.com<sup>1</sup>,&nbsp;&nbsp;&nbsp; jchang@hanyang.ac.kr <sup>2</sup></center>
-
+	  </div>
+	  <div>
+	  <center><i>Anonymous submission to ASRU 2025</i></center>
+	</div>
 	<center><h2 id="abstract">Abstract</h2></center>
 	<br>
 	<p style = "font-size: 18px; padding-left: 15px; padding-right: 15px;">
-Conversational text-to-speech aims to generate natural and contextually appropriate speech in dialogue. While previous studies have made progress in modeling dialogue context, many have placed limited emphasis on speaker interactions and emotional dynamics. In addition, the use of pretrained models for feature extraction may lead to mismatches between ground truth and synthesized speech representations. To address these limitations, we propose DynaTalk with two core components. First, the split context learner separates speaker-specific and global contexts to better capture conversational structure and generate fine-grained prosody conditions from text. Second, mel prosody teacher extracts prosody targets from ground truth mel-spectrograms to guide the learner and compensate for missing acoustic information. Experimental results demonstrate that DynaTalk effectively models conversational context, enabling the generation of natural and context-sensitive speech.
+Conversational text-to-speech aims to generate natural and contextually appropriate speech in dialogues. While previous studies have made progress in modeling dialogue context, many have placed limited emphasis on speaker interactions and emotional dynamics. In addition, the use of pretrained models for feature extraction may lead to mismatches between ground truth and synthesized speech representations. To address these limitations, we propose DynaTalk with two core components. First, the split context learner separates speaker-aware dynamics and global contexts to capture better conversational structure and generate fine-grained prosody conditions from text. Second, the mel prosody teacher extracts the target prosody from ground truth mel-spectrograms to guide the learner and compensate for the lack of acoustic information. Experimental results demonstrate that DynaTalk effectively models conversational context, enabling the generation of natural and context-sensitive speech.
 	</p>
 	<br>
 	<center><h2><p class="toc_title">Contents</p></h2></center>
@@ -117,8 +122,8 @@ Conversational text-to-speech aims to generate natural and contextually appropri
 
 <div class="slider-container">
     <button class="arrow left-arrow" onclick="slideImage(-1)">◀</button>
-    <img id="image" src="./Dialogue_example.png" alt="image">
-    <div id="text" class="image-text">Figure 1. Chain of speaker's emotion affect on conversation.</div>
+    <img id="image" src="./Emotion_Affect_Previous.png" alt="image">
+    <div id="text" class="image-text">Figure 1. Previous researches context modeling.</div>
     <button class="arrow right-arrow" onclick="slideImage(1)">▶</button>
 </div>
 
@@ -848,18 +853,23 @@ speech.</li>
 	<br>
 	<center><a name="3"><h2>3. Evaluation Results</h2></a></center>
 
-		<ul><p style = "padding-left: 10px; padding-right: 10px;">
-			<b>Mean Opinion Score(MOS)</b> and <b>Dialogue Mean Opinion Score (D-MOS)</b> was rated from 1 to 5. And average all the score with 95% confidence rate.
-		</p></ul>
-		<ul><p style = "padding-left: 10px; padding-right: 10px;">
-			<b>Log-F0 Root Mean Square Error (F0 RMSE)</b> is the pitch accuracy. Pitch was extracted by pyworld library, and calculated into log scale. Then calculate with root mean square between ground truth and synthesized speech.
-		</p></ul>
-		<ul><p style = "padding-left: 10px; padding-right: 10px;">
-			<b>Mel Ceptrial Distortion (MCD)</b> calculate the difference between ground truth audio and synthesized speech.
-		</p></ul>
-		<ul><p style = "padding-left: 10px; padding-right: 10px;">
-			<b>Matching Root Mean Square Error (M-RMSE)</b> is calculating the difference between mel prosody extractor results and text-only dialogue encoder results.
-		</p></ul>
+	<ul>
+	  <li style="padding-left: 10px; padding-right: 10px;">
+	    <b>Mean Opinion Score (MOS)</b> and <b>Dialogue Mean Opinion Score (D-MOS)</b> were rated on a scale from 1 to 5. The average scores were computed with a 95% confidence interval. MOS was evaluated using single utterances, while D-MOS was rated based on the overall naturalness of the entire dialogue.
+	  </li>
+	  <li style="padding-left: 10px; padding-right: 10px;">
+	    <b>Log-F0 Root Mean Square Error (F0 RMSE)</b> measures pitch accuracy. Pitch was extracted using the pyworld library and converted to the log scale. The RMSE was then computed between the ground truth and synthesized speech.
+	  </li>
+	  <li style="padding-left: 10px; padding-right: 10px;">
+	    <b>Energy Root Mean Square Error (E-RMSE)</b> measures the accuracy of predicted energy. Energy is extracted as the average per frame, and the E-RMSE is computed as the root mean square error between the ground truth and the synthesized speech.
+	  </li>
+	  <li style="padding-left: 10px; padding-right: 10px;">
+	    <b>Mel Cepstral Distortion (MCD)</b> measures the difference between the ground truth and synthesized audio in the mel-cepstral domain.
+	  </li>
+	  <li style="padding-left: 10px; padding-right: 10px;">
+	    <b>Matching Root Mean Square Error (M-RMSE)</b> quantifies the difference between the outputs of the mel prosody extractor and the text-only dialogue encoder.
+	  </li>
+	</ul>
 
 	<br>
 		<center>
